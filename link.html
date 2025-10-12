@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>リンク探しツール</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>🔗 リンク探しツール</header>
+
+    <main>
+      <p>リンク名を入力して検索し、ATK/DEFを確認できます。</p>
+
+      <!-- 入力フォーム -->
+      <input type="text" id="linkName" placeholder="例: BOSS, 悪夢" />
+      <button id="searchBtn">検索</button>
+
+      <!-- 結果表示 -->
+      <div class="output-box" id="resultBox">
+        <p id="atkDefDisplay">ATK: - / DEF: -</p>
+        <button id="addBtn" disabled>保持</button>
+      </div>
+
+      <!-- 合計表示 -->
+      <div class="output-box">
+        <h3>合計値</h3>
+        <p id="totalDisplay">ATK: 0%　DEF: 0%</p>
+        <button id="resetBtn">リセット</button>
+      </div>
+
+      <div style="margin-top: 2em">
+        <a href="index.html" class="page-link">← メニューに戻る</a>
+      </div>
+    </main>
+
+    <script>
+        // 🔸リンク名とATK/DEF対応表（例示）
+        const linkData = {
+          戦闘民族サイヤ人: { atk:10 , def:0  },未来からの使者: { atk:10 , def:0  },超サイヤ人: { atk:15 , def:0  },
+          神戦士: { atk:15, def:0 },復活のF: { atk:10, def:10 },復活のf: { atk:10, def:10 },見た目と違って: { atk:10 , def:10  },
+          天才: { atk:15 , def:0  },無邪気: { atk:15 , def:0  },歴戦の戦士: { atk:15 , def:0  },
+          悪夢: { atk:15 , def:0  },残虐: { atk:15 , def:0  },希望の星: { atk:15 , def:0  },
+          神の次元:{atk:15,def:0}, 征服の野望:{atk:15,def:15}, 邪悪龍:{atk:20,def:20},
+          超激戦:{atk:20,def:0}, サイヤ人の誇り:{atk:20,def:0}, 宇宙最凶:{atk:20,def:0},
+          Z戦士:{atk:20,def:0},z戦士:{atk:20,def:0}, 超神激戦:{atk:20,def:0}, 銀河戦士:{atk:20,def:20},
+          ドラゴンボールの導き:{atk:20,def:0}, 宇宙の壊し屋:{atk:25,def:15}, サイヤの咆哮:{atk:25,def:10},
+          覚醒の先駆者:{atk:25,def:10}, 正義のヒーロー:{atk:25,def:0}, ギニュー特戦隊:{atk:25,def:0},
+          かめはめ波:{atk:10,def:0}, 神から授かりし力:{atk:10,def:0}, 限界を超えた姿:{atk:10,def:0},
+          伝説の力:{atk:15,def:0}, インファイター:{atk:15,def:0}, 的確なアシスト:{atk:15,def:0},
+          バーニングファイト:{atk:20,def:0}, 立ちはだかる壁:{atk:20,def:0}, バーサーカー:{atk:30,def:0},
+
+          人造人間:{atk:0,def:20}, 孫一族:{atk:0,def:20}, タフネス戦士:{atk:0,def:20},
+          冷静な判断:{atk:0,def:25}, ぶっちぎりのパワー:{atk:10,def:10}, 魔人:{atk:15,def:15},
+          頭脳派:{atk:15,def:15}, 亀仙流:{atk:20,def:20}, BOSSキャラ:{atk:25,def:25},bossキャラ:{atk:25,def:25},
+          サイヤ人の血:{atk:5,def:5}, 王の血筋:{atk:5,def:0}, 絶望の未来:{atk:0,def:0},
+          分身:{atk:0,def:0}, バーダックチーム:{atk:10,def:10}, 卑怯者:{atk:0,def:0},
+          金色の戦士:{atk:0,def:0}, 魂vs魂:{atk:5,def:5}, 臨戦態勢:{atk:5,def:5},
+          合体戦士:{atk:5,def:5}, 驚異的なスピード:{atk:0,def:5}, 恐怖と絶望:{atk:0,def:0},
+          宇宙最強の一族:{atk:0,def:0}, 限界突破:{atk:5,def:5}, 復活:{atk:5,def:5},
+          GT:{atk:10,def:10},gt:{atk:10,def:10}, 第6宇宙の戦士:{atk:6,def:6}, 不思議な大冒険:{atk:7,def:7},
+          巨大化:{atk:0,def:10}, 紳士:{atk:0,def:10}, 究極生命体への系譜:{atk:10,def:10},
+          女戦士:{atk:0,def:0}, 決めポーズ:{atk:7,def:0}, ヘラー一族:{atk:5,def:0},
+          双子:{atk:5,def:5}, 受け継がれる意志:{atk:10,def:0}, 永久エネルギー炉:{atk:5,def:5},
+
+          短期決戦:{atk:7,def:0}, 力の大会:{atk:7,def:7}, 自己修復機能:{atk:0,def:0},
+          合体失敗:{atk:0,def:0}, 無限の再生:{atk:0,def:10}, 変身タイプ:{atk:10,def:10},
+          ナメック星人:{atk:7,def:7}, グルメ:{atk:0,def:7}, 至高の戦士:{atk:10,def:0},
+          ベジータ王への恨み:{atk:10,def:0}, チャンピオンの力:{atk:0,def:0}, 金持ち:{atk:0,def:20},
+          勇気:{atk:10,def:0}, 一心同体:{atk:0,def:0}, テレパシー:{atk:0,def:0},
+          異世界からの来訪者:{atk:0,def:20}, メカ系:{atk:0,def:0}, 魔の流儀:{atk:10,def:10},
+          忠誠心:{atk:0,def:0}, 邪念の支配者:{atk:0,def:0}, 天下一武道会優勝者:{atk:0,def:10},
+          相性抜群:{atk:10,def:10}, クウラの部下:{atk:0,def:0}, ターレス軍団:{atk:0,def:0},
+          逃げ足:{atk:0,def:0}, 尊敬の眼差し:{atk:10,def:10}, 黄金のZ戦士:{atk:0,def:0},
+          魔人復活計画:{atk:0,def:20}, 有機質改造:{atk:5,def:5}, 不変の絆:{atk:0,def:20},
+          エネルギー吸収式:{atk:0,def:0}, 占いババの闘士:{atk:5,def:5}, 融合:{atk:10,def:10},
+          科学者:{atk:0,def:20}, サイヤ人への憎しみ:{atk:10,def:0}, パトロール:{atk:0,def:20},
+          圧倒的な戦闘力:{atk:10,def:10}, RR軍:{atk:10,def:10}, スピードタイプ:{atk:15,def:0},
+          超強敵:{atk:15,def:0}, 魔術の使い手:{atk:15,def:0}, 尊敬:{atk:20,def:0},
+          コンビネーション:{atk:20,def:0}, 新生・天下一武道会:{atk:20,def:0}, ペンギン村の大冒険:{atk:20,def:0},
+          鶴仙流:{atk:20,def:0}, 強襲:{atk:20,def:0}, 弱点の補強:{atk:20,def:0},
+          あの世の戦士:{atk:20,def:10}, 魔の力:{atk:20,def:10}, 新生:{atk:20,def:20},
+          フリーザの手下:{atk:20,def:10}, ゼノバース:{atk:20,def:10}, 超強襲:{atk:25,def:0},
+          クウラ機甲戦隊:{atk:25,def:25}, どどん波:{atk:15,def:0}, 英雄:{atk:0,def:25},
+          門下生:{atk:0,def:30}, フリーザ軍:{atk:10,def:20}, 新生フリーザ軍:{atk:25,def:25},
+          超能力:{atk:0,def:0}
+      };
+
+        // 🔸合計値を保持する変数
+        let totalATK = 0;
+        let totalDEF = 0;
+
+        // HTML要素の取得
+        const linkInput = document.getElementById("linkName");
+        const searchBtn = document.getElementById("searchBtn");
+        const atkDefDisplay = document.getElementById("atkDefDisplay");
+        const addBtn = document.getElementById("addBtn");
+        const totalDisplay = document.getElementById("totalDisplay");
+
+        // 🔹検索ボタン押下時の処理
+        searchBtn.addEventListener("click", () => {
+          const name = linkInput.value.trim();
+          const data = linkData[name];
+
+          if (data) {
+            atkDefDisplay.textContent = `ATK: ${data.atk}%　DEF: ${data.def}%`;
+            addBtn.disabled = false;
+            addBtn.dataset.atk = data.atk;
+            addBtn.dataset.def = data.def;
+          } else {
+            atkDefDisplay.textContent = "該当するリンクが見つかりません。";
+            addBtn.disabled = true;
+          }
+        });
+
+        // 🔹保持ボタン押下時の処理
+        addBtn.addEventListener("click", () => {
+          const atk = Number(addBtn.dataset.atk);
+          const def = Number(addBtn.dataset.def);
+
+          totalATK += atk;
+          totalDEF += def;
+
+          totalDisplay.textContent = `ATK: ${totalATK}%　DEF: ${totalDEF}%`;
+        });
+
+        resetBtn.addEventListener("click", () => {
+          totalATK = 0;
+          totalDEF = 0;
+          totalDisplay.textContent = `ATK: 0% DEF: 0%`;
+        });
+    </script>
+  </body>
+</html>
