@@ -143,35 +143,83 @@ select {
   text-overflow: ellipsis;
 }
 
-/* スマホ小画面（～480px） 
-@media (max-width: 480px) {
-  header {
-    font-size: 1em;
-    padding: 0.6em 0;
+
+/* ===============================
+   📱 スマホ対応メディアクエリ
+   =============================== */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 16px;
+    text-align: center;
+    padding: 0;
   }
 
+  header {
+    font-size: 1.2em;
+    padding: 0.8em 0;
+  }
+
+  main {
+    padding: 1em;
+  }
+
+  /* 横並び → 縦並び */
+  .dash-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  /* ボックスは画面幅いっぱいに */
+  .output-box,
+  .flex-item,
+  .damage-result-box {
+    width: 90vw !important;
+  }
+
+  /* 入力欄は幅いっぱい */
+  input,
+  select {
+    width: 80vw;
+    max-width: 300px;
+    font-size: 1em;
+  }
+
+  .small-input {
+    width: 60vw;
+  }
+
+  /* ボタンは大きく、押しやすく */
   button,
   a.page-link {
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0.4em 0;
+    width: 80vw;
+    max-width: 300px;
+    padding: 1em;
+    font-size: 1em;
+    margin: 0.5em auto;
+    display: block;
   }
 
+  /* 画像サイズを調整 */
   .round-img {
-    width: 90px;
-    height: 110px;
+    width: 60vw;
+    height: auto;
   }
 
-  .enemy-atk-box {
-    margin-top: 10px;
-  }
-
+  /* セクションタイトルなど */
   .section-title {
+    font-size: 1.1em;
+  }
+
+  /* テキストの行間調整 */
+  .note {
+    line-height: 1.6;
     font-size: 0.95em;
   }
 
-  .note {
-    font-size: 0.8em;
+  /* セレクトボックスも横幅確保 */
+  #stageSelect,
+  #subStageSelect {
+    width: 80vw;
   }
 }
-*/
