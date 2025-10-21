@@ -16,10 +16,33 @@ header {
   font-weight: bold;
 }
 
-/* コンテナ */
+/* コンテナ */ 
 main {
-  padding: 2em;
+  padding: 2vw 2vh;
 }
+
+.dash-section {   /*子要素同士の配置（横幅など）を変更。　　　※子要素の中身には影響なし*/
+  display: flex;
+  justify-content: center; /* 中央に並べる */
+  align-items: flex-start; /* 上揃え */
+  gap: 6vw; /* 各項目間の余白 */
+  flex-wrap: nowrap; /* 折り返さない */
+}
+
+.output-box {   /*項目の枠組み*/
+  margin-top: 1.5em;
+  padding: 1em;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  width:25vw; /*箱の中身の大きさ*/
+}
+
+.flex-item {/*各要素の横幅　要素全体と表示される文字との間がある場合は余白が広がったように見える*/
+  flex: none;
+  width: 25vw;  /* 箱全体の大きさ*/
+}/*flexのwidthとoutputのwidthの値の差は各要素内の余白となる
 
 /* ボタン風リンク */
 button,
@@ -50,28 +73,17 @@ select {
   font-size: 1em;
 }
 
-.output-box {
-  margin-top: 1.5em;
-  padding: 1em;
-  background-color: #fff;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  display: inline-block;
+.damage-result-box {
+  flex: none;
+  width: 15vw !important;
+  box-sizing: border-box;
 }
-
-/* 横並び用 */
-.flex-container {
-  display: flex;
-  gap: 2em;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.flex-item {
-  flex: 1;
-  min-width: 250px;
-  max-width: 400px;
-}
+/*
+.under-box {
+  flex: none;
+  width: 23vw !important;
+  box-sizing: border-box;
+}*/
 
 .section-title {
   font-weight: bold;
@@ -87,16 +99,17 @@ select {
   font-size: 0.9em;
   color: #333;
   margin-top: 0.5em;
+  line-height:1.5vh;
 }
 
 .small-input {
-  width: 80px;
+  width: 10vw;
 }
 
 .round-img {
   display: inline-block;
-  width: 140px; /* ここを大きくする */
-  height: 180px; /* ここも同じ比率で大きく */
+  width: 10vw; /* ここを大きくする */
+  height: 24vh; /* ここも同じ比率で大きく */
   margin: 0.5em;
   background-color: #eee;
   border-radius: 8px; /* optional: 角丸にする */
@@ -109,39 +122,28 @@ select {
   object-fit: cover; /* 画像の縦横比を維持しつつ枠に収める */
 }
 
-.dash-section {
-  display: flex;
-  justify-content: flex-start; /* 横方向に並べる */
-  align-items: flex-start; /* 上揃え */
-  gap: 10px; /* 各ブロックの間に余白 */
-  flex-wrap: nowrap; /* 折り返さない */
-}
 
-.box1 {
-  margin-right: 35px; /* 右に20pxのすき間 */
+/* 右に20pxのすき間 */
+/* .box1 {
+  margin-right: 3vw; 
 }
-
-.enemy-atk-box {
-  flex: 5; /* ← 横幅を他より広くする */
-  max-width: 550px;
-  margin-top: 73px;
-}
+*/
 
 #stageSelect {
-  width: 160px;
+  width: 12vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 #subStageSelect {
-  width: 160px;
+  width: 12vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* スマホ小画面（～480px） */
+/* スマホ小画面（～480px） 
 @media (max-width: 480px) {
   header {
     font-size: 1em;
@@ -172,3 +174,4 @@ select {
     font-size: 0.8em;
   }
 }
+*/

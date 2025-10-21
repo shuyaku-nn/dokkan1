@@ -9,110 +9,65 @@
   <body>
     <header>⚔️ ダメージ計算ツール</header>
     <main>
-      <div class="dash-section">
-        <div class="flex-container">
+      <div class="dash-section"> <!--すべてをグループとしてまとめ、各項目の間の余白を開ける-->
+        
           <!-- 左：被ダメ計算 -->
           <div class="flex-item">
             <p>
               敵ATK・味方DEF・軽減率・全属性ガードの有無を入力して計算します。
             </p>
-            <div class="output-box">
-              <label>敵ATK：</label
-              ><input
-                type="number"
-                id="enemyAtk"
-                placeholder="例: 5000000"
-              /><br />
-              <label>味方DEF：</label
-              ><input
-                type="number"
-                id="allyDef"
-                placeholder="例: 1000000"
-              /><br />
-              <label>軽減率（％）：</label
-              ><input type="number" id="reduction" placeholder="例: 20" /><br />
-              <label>全属性ガード：</label>
-              <label><input type="radio" name="guard" value="yes" />あり</label>
-              <label
-                ><input
-                  type="radio"
-                  name="guard"
-                  value="no"
-                  checked
-                />なし</label
-              ><br />
+            <div class="output-box"> <!--ooutput自体には横幅の指定は無いけど、flexitemですでに宣言されていて、それを読み込む-->
+              <label>敵ATK：
+              <input type="number" style="width:10vw;" id="enemyAtk" placeholder="例: 5000000"/></label>
+              <br />
+              <label>味方DEF：
+              <input type="number" style="width:10vw;" id="allyDef" placeholder="例: 1000000"/></label>
+              <br />
+              <label>軽減率（％）：
+              <input type="number" style="width:10vw;" id="reduction" placeholder="例: 20" /></label>
+              <br />
+              全属性ガード：
+              <label> <input type="radio" name="guard" value="yes" />あり</label>
+              <label> <input type="radio" name="guard" value="no" checked/>なし</label><br />
               <button id="calcBtn">計算</button>
             </div>
-            <div class="output-box">
+            <div class="output-box damage-result-box">
               <h3>被ダメージ結果</h3>
               <p id="damageOutput">---</p>
             </div>
           </div>
 
-          <div class="box1">
-            <!-- 右：ステージ・ラウンド -->
-            <div class="flex-item">
+          <div class="flex-item">
               <p class="section-title">ステージ選択</p>
               <div class="output-box">
                 <label>ステージ：</label>
                 <select id="stageSelect">
                   <option value="">選択してください</option>
-                  <option value="stage1">
-                    バトルフェスティバル,,,1ラウンド選択固定
-                  </option>
+                  <option value="stage1">バトルフェスティバル,,,1ラウンド選択固定</option>
                   <option value="stage2">スペシャルバトル 2025</option>
                   <option value="stage3">ガチバトル</option>
-                  <option value="stage4">
-                    バトルスペクタル 次世代のサイヤ人編
-                  </option>
+                  <option value="stage4">バトルスペクタル 次世代のサイヤ人編</option>
                   <option value="stage5">レットゾーン 純粋サイヤ人編</option>
                   <option value="stage6"></option>
-                  <option value="stage7"></option></select
-                ><br />
+                  <option value="stage7"></option>
+                  </select><br />
 
                 <label>サブステージ：</label>
                 <select id="subStageSelect">
-                  <option value="">選択してください</option></select
-                ><br />
+                  <option value="">選択してください</option></select><br />
 
-                <label>ラウンド：</label>
+                ラウンド：
                 <div id="roundRadios">
-                  <label
-                    ><input
-                      type="radio"
-                      name="round"
-                      value="1"
-                    />1ラウンド</label
-                  >
-                  <label
-                    ><input
-                      type="radio"
-                      name="round"
-                      value="2"
-                    />2ラウンド</label
-                  >
-                  <label
-                    ><input
-                      type="radio"
-                      name="round"
-                      value="3"
-                    />3ラウンド</label
-                  >
-                  <br />
-                  <label
-                    ><input
-                      type="radio"
-                      name="round"
-                      value="4"
-                    />4ラウンド</label
-                  >
-                  <label
-                    ><input
-                      type="radio"
-                      name="round"
-                      value="5"
-                    />5ラウンド</label
-                  >
+                  <label>
+                    <input type="radio" name="round" value="1" checked>1ラウンド</label>
+                  <label>
+                    <input type="radio" name="round" value="2">2ラウンド</label>
+                  <label>
+                    <input type="radio" name="round" value="3">3ラウンド</label> <br />
+                  <label>
+                    <input type="radio" name="round" value="4">4ラウンド</label>
+                  <label>
+                    <input type="radio" name="round" value="5">5ラウンド</label>
                 </div>
 
                 <div id="roundInfo" class="note">
@@ -122,183 +77,102 @@
                   <p>補足: <span class="note-value">---</span></p>
                 </div>
               </div>
-            </div>
           </div>
-        </div>
 
         <!-- 敵ATK計算ブロック -->
-
-        <div class="flex-container">
-          <div class="flex-item output-box enemy-atk-box">
-            <h3>敵ATK計算</h3>
-            <label>敵ATK：</label>
-            <input type="number" id="enemyBaseATK" placeholder="10000" /><br />
-            <label>足し算パッシブ：</label>
-            <input
-              type="number"
-              id="enemyAddPassive"
-              placeholder="100%"
-            /><br />
-            <label>掛け算パッシブ：</label>
-            <input
-              type="number"
-              id="enemyMultPassive"
-              placeholder="100%"
-            /><br />
-            <label>会心パッシブ：</label>
-            <input
-              type="number"
-              id="enemyCritPassive"
-              placeholder="100%"
-            /><br />
-            <label>テリトリーパッシブ：</label>
-            <input
-              type="number"
-              id="enemyTerritoryPassive"
-              placeholder="100%"
-            /><br />
-            <button id="calcEnemyAtkBtn">計算</button>
-            <p id="enemyAtkResult">敵ATK実数値：---</p>
+          <div class="flex-item"> 
+            <p class="section-title">敵ATK計算</p>
+            <div class="output-box">
+             <label>敵ATK：
+             <input type="number" style="width:12vw;" id="enemyBaseATK" placeholder="10000" /></label><br />
+             <label>足し算パッシブ：
+             <input type="number" style="width:10vw;" id="enemyAddPassive" placeholder="100%"/></label><br />
+             <label>掛け算パッシブ：
+             <input type="number" style="width:10vw;" id="enemyMultPassive" placeholder="100%"/></label><br />
+             <label>会心パッシブ：
+             <input type="number" style="width:10vw;" id="enemyCritPassive" placeholder="100%"/></label><br />
+             <label style="font-size:14px;">テリトリーパッシブ：
+             <input type="number" style="width:10vw;" id="enemyTerritoryPassive" placeholder="100%"/></label><br />
+             <button id="calcEnemyAtkBtn">計算</button>
+             <p id="enemyAtkResult">敵ATK実数値：---</p>
+            </div>
           </div>
-        </div>
-      </div>
+         </div>
+
       <div class="dashed-line"></div>
 
       <!-- 横並び下段：味方ATK・DEF -->
-      <div class="flex-container">
-        <div class="flex-item output-box">
+      <div class="dash-section">
+        <div class="flex-item"> 
           <p class="section-title">味方ATK計算</p>
-          <label
-            >ATK:<input
-              type="number"
-              id="allyATK"
-              class="small-input"
-              placeholder="10000" /></label
-          ><br />
-          <label
-            >リーダー倍率:<input
-              type="number"
-              id="leaderAtk"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >足し算パッシブ:<input
-              type="number"
-              id="plusPassiveAtk"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >掛け算パッシブ:<input
-              type="number"
-              id="multPassiveAtk"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >気力補正:<input
-              type="number"
-              id="kiBonus"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >リンク倍率:<input
-              type="number"
-              id="linkBonus"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >必殺倍率:<input
-              type="number"
-              id="superBonus"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >アクティブ倍率:<input
-              type="number"
-              id="activeBonus"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >フィールド倍率:<input
-              type="number"
-              id="fieldBonus"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
+          <div class="output-box underbox">
+          <label>
+            ATK:<input type="number" id="allyATK" class="small-input" placeholder="10000" />
+          </label><br />
+          <label>
+            リーダー倍率:<input type="number" id="leaderAtk" class="small-input" placeholder="100%" />
+          </label><br />
+          <label>
+            足し算パッシブ:<input type="number" id="plusPassiveAtk" class="small-input" placeholder="100%" />
+          </label><br />
+          <label>
+            掛け算パッシブ:<input type="number" id="multPassiveAtk" class="small-input" placeholder="100%" />
+          </label><br />
+          <label>
+            気力補正:<input type="number" id="kiBonus" class="small-input" placeholder="100%" />
+          </label><br />
+          <label>
+            リンク倍率:<input type="number" id="linkBonus" class="small-input" placeholder="100%" />
+            </label><br />
+          <label>
+            必殺倍率:<input type="number" id="superBonus" class="small-input" placeholder="100%" />
+          </label><br />
+          <label>
+            アクティブ倍率:<input type="number" id="activeBonus" class="small-input" placeholder="100%" />
+            </label><br />
+          <label>
+            フィールド倍率:<input type="number" id="fieldBonus" class="small-input" placeholder="100%" />
+          </label><br />
           <button id="calcAllyAtkBtn">計算</button>
           <p id="allyAtkResult">実ATK: ---</p>
+          </div>
         </div>
 
-        <div class="flex-item output-box">
+        <div class="flex-item"> 
           <p class="section-title">味方DEF計算</p>
-          <label
-            >DEF:<input
-              type="number"
-              id="allyDEF"
-              class="small-input"
-              placeholder="10000" /></label
-          ><br />
-          <label
-            >リーダー倍率:<input
-              type="number"
-              id="leaderDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >足し算パッシブ:<input
-              type="number"
-              id="plusPassiveDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >掛け算パッシブ:<input
-              type="number"
-              id="multPassiveDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >リンク倍率:<input
-              type="number"
-              id="linkBonusDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >必殺倍率:<input
-              type="number"
-              id="superBonusDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >アクティブ倍率:<input
-              type="number"
-              id="activeBonusDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
-          <label
-            >フィールド倍率:<input
-              type="number"
-              id="fieldBonusDef"
-              class="small-input"
-              placeholder="100%" /></label
-          ><br />
+          <div class="output-box under-box">
+          <label>
+            DEF:<input type="number"id="allyDEF"class="small-input"placeholder="10000" />
+            </label><br />
+          <label>
+            リーダー倍率:<input type="number"id="leaderDef"class="small-input"placeholder="100%" />
+            </label><br />
+          <label>
+            足し算パッシブ:<input type="number"id="plusPassiveDef"class="small-input"placeholder="100%" />
+            </label><br />
+          <label>
+            掛け算パッシブ:<input type="number"id="multPassiveDef"class="small-input"placeholder="100%" />
+            </label><br />
+          <label>
+            リンク倍率:<input type="number"id="linkBonusDef"class="small-input"placeholder="100%" />
+            </label><br />
+          <label>
+            必殺倍率:<input type="number"id="superBonusDef"class="small-input"placeholder="100%" />
+            </label><br />
+          <label>
+            アクティブ倍率:<input type="number"id="activeBonusDef"class="small-input"placeholder="100%" />
+            </label><br />
+          <label>
+            フィールド倍率:<input type="number"id="fieldBonusDef"class="small-input"placeholder="100%" />
+            </label><br />
           <button id="calcAllyDefBtn">計算</button>
           <p id="allyDefResult">実DEF: ---</p>
+          </div>
         </div>
 
-        <div class="flex-item output-box">
+        <div class="flex-item">
           <p class="section-title">その他の補足</p>
+          <div class="output-box under-box">
           <div style="text-align: left">
             <p>
               ・LR必殺 超極大LV20 = 440%<br />
@@ -308,12 +182,19 @@
               ・LRは大up(30%)を加算、潜在倍率はLV1毎に5%up
             </p>
           </div>
+          </div>
         </div>
       </div>
 
       <div style="margin-top: 2em">
         <a href="index.html" class="page-link">← メニューに戻る</a>
       </div>
+
+
+
+
+
+
 
       <script>
         // 被ダメ計算
@@ -342,9 +223,7 @@
           if (guard === "yes") result /= 2;
           if (result < 0) result = 0;
 
-          damageOutput.textContent = `${Math.floor(
-            result
-          ).toLocaleString()} ダメージ`;
+          damageOutput.textContent = `${Math.floor(result).toLocaleString()} ダメージ`;
         });
 
         // ステージ・サブステージ・ラウンド
@@ -359,339 +238,216 @@
               //ステージ名を選択した後のそのステージかを選ぶ時に選択する名前。
               1: {
                 //ここがラウンドを表す。 1:{なら1ラウンド　　2:{なら2ラウンド
-                normalAtk: "200万",
-                superAtk: "560万",
-                img: "image1/fes1.png",
-                note: "なし",
-              },
-            },
+                normalAtk: "200万",superAtk: "560万",
+                img: "image1/fes1.png",note: "なし",
+              },},
             "身勝手(46ラウンド)": {
               1: {
-                normalAtk: "330万",
-                superAtk: "1200万",
-                img: "image1/fes2.png",
-                note: "たまに回避",
-              },
-            },
+                normalAtk: "330万",superAtk: "1200万",
+                img: "image1/fes2.png",note: "たまに回避",
+              },},
             "古事記(47ラウンド)": {
               1: {
-                normalAtk: "370万",
-                superAtk: "1300万",
-                img: "image1/fes3.png",
-                note: "なし",
-              },
-            },
+                normalAtk: "370万",superAtk: "1300万",
+                img: "image1/fes3.png",note: "なし",
+              },},
             "ダイマ(48ラウンド)": {
               1: {
-                normalAtk: "500万",
-                superAtk: "1800万",
-                img: "image1/fes4.png",
-                note: "なし",
-              },
-            },
+                normalAtk: "500万",superAtk: "1800万",
+                img: "image1/fes4.png",note: "なし",
+              }, },
             "ゴジータ(49ラウンド)": {
               1: {
-                normalAtk: "700万、必殺後1100万",
-                superAtk: "2800万",
-                img: "image1/fes5.png",
-                note: "なし",
-              },
-            },
+                normalAtk: "700万、必殺後1100万",superAtk: "2800万",
+                img: "image1/fes5.png",note: "なし",
+              }, },
             "ベジット(50ラウンド)": {
               1: {
-                normalAtk: "700万",
-                superAtk: "2400万",
-                img: "image1/fes6.png",
-                note: "なし",
-              },
-            },
-          },
+                normalAtk: "700万",superAtk: "2400万",
+                img: "image1/fes6.png",note: "なし",
+              },},},
+
           stage2: {
             "ステージ1, 1ラウンド戦、ラウンド1-ロゼ, ラウンド2-ザマスで表示": {
               1: {
-                normalAtk: "125万、必殺後190万",
-                superAtk: "440万",
-                img: "image1/sp1-1.png",
-                note: "攻撃を受けるたびATK30%up(最大300%)、ザマスがいるとATK50%up",
+                normalAtk: "125万、必殺後190万",superAtk: "440万",
+                img: "image1/sp1-1.png",note: "攻撃を受けるたびATK30%up(最大300%)、ザマスがいるとATK50%up",
               },
               2: {
-                normalAtk: "160万",
-                superAtk: "480万",
-                img: "image1/sp1-2.png",
-                note: "順列ロック",
-              },
-            },
-            "ステージ2, 1ラウンド戦、ラウンド1-悟空, ラウンド2-ベジータで表示":
-              {
+                normalAtk: "160万",superAtk: "480万",
+                img: "image1/sp1-2.png",note: "順列ロック",
+              }, },
+            "ステージ2, 1ラウンド戦、ラウンド1-悟空, ラウンド2-ベジータで表示":{
                 1: {
-                  normalAtk: "80万、必殺後100万",
-                  superAtk: "300万",
-                  img: "image1/sp2-1.png",
-                  note: "3ターン目にATK160%up、ベジータがいるとATK50%up",
+                  normalAtk: "80万、必殺後100万",superAtk: "300万",
+                  img: "image1/sp2-1.png",note: "3ターン目にATK160%up、ベジータがいるとATK50%up",
                 },
                 2: {
-                  normalAtk: "160万",
-                  superAtk: "480万",
-                  img: "image1/sp2-2.png",
-                  note: "なし",
-                },
-              },
+                  normalAtk: "160万",superAtk: "480万",
+                  img: "image1/sp2-2.png",note: "なし",
+                }, },
             ステージ3: {
               1: {
-                normalAtk: "80万、必殺後120万",
-                superAtk: "280万",
-                img: "image1/sp3.png",
-                note: "テリトリー内ではATK100%up、気絶必殺持ち",
-              },
-            },
+                normalAtk: "80万、必殺後120万",superAtk: "280万",
+                img: "image1/sp3.png",note: "テリトリー内ではATK100%up、気絶必殺持ち",
+              },},
             ステージ4: {
               1: {
-                normalAtk: "90万、必殺後170万",
-                superAtk: "350万",
-                img: "image1/sp4.png",
-                note: "ターン経過毎にATK40%up(最大160%)",
-              },
-            },
-          },
+                normalAtk: "90万、必殺後170万",superAtk: "350万",
+                img: "image1/sp4.png",note: "ターン経過毎にATK40%up(最大160%)",
+              }, },},
           stage3: {
             ステージ1: {
               1: {
-                normalAtk: "75万",
-                superAtk: "225万",
-                img: "image1/gati1.png",
-                note: "攻撃を受けるたびにATK1%down(最大15%)",
-              },
-            },
+                normalAtk: "75万",superAtk: "225万",
+                img: "image1/gati1.png",note: "攻撃を受けるたびにATK1%down(最大15%)",
+              },},
             ステージ2: {
               1: {
-                normalAtk: "30万",
-                superAtk: "85万",
-                img: "image1/gati2.png",
-                note: "3ターン目にATK100%up",
-              },
-            },
+                normalAtk: "30万",superAtk: "85万",
+                img: "image1/gati2.png",note: "3ターン目にATK100%up",
+              },},
             "ステージ3, 2ラウンド戦": {
               1: {
-                normalAtk: "30万、必殺後40万",
-                superAtk: "90万",
-                img: "image1/gati3-1.png",
-                note: "なし",
+                normalAtk: "30万、必殺後40万",superAtk: "90万",
+                img: "image1/gati3-1.png",note: "なし",
               },
               2: {
-                normalAtk: "45万、必殺後60万",
-                superAtk: "150万",
-                img: "image1/gati3-2.png",
-                note: "必殺を受けるたびにATK20%up(最大200%)",
-              },
-            },
+                normalAtk: "45万、必殺後60万",superAtk: "150万",
+                img: "image1/gati3-2.png",note: "必殺を受けるたびにATK20%up(最大200%)",
+              },},
             ステージ4: {
               1: {
-                normalAtk: "65万、必殺後100万",
-                superAtk: "230万",
-                img: "image1/gati4.png",
-                note: "毎ターンHP6400万回復",
-              },
-            },
+                normalAtk: "65万、必殺後100万",superAtk: "230万",
+                img: "image1/gati4.png",note: "毎ターンHP6400万回復",
+              }, },
             ステージ5: {
               1: {
-                normalAtk: "80万、必殺後120万",
-                superAtk: "290万",
-                img: "image1/gati5.png",
-                note: "なし",
-              },
-            },
+                normalAtk: "80万、必殺後120万",superAtk: "290万",
+                img: "image1/gati5.png",note: "なし",
+              },},
             "ステージ6, 2ラウンド戦": {
               1: {
-                normalAtk: "30万、必殺後40万",
-                superAtk: "90万",
-                img: "image1/gati6-1.png",
-                note: "なし",
+                normalAtk: "30万、必殺後40万",superAtk: "90万",
+                img: "image1/gati6-1.png",note: "なし",
               },
               2: {
-                normalAtk: "40万、必殺後60万",
-                superAtk: "140万",
-                img: "image1/gati6-2.png",
-                note: "ターン経過毎にATK50%up(最大300%)",
-              },
-            },
-          },
+                normalAtk: "40万、必殺後60万",superAtk: "140万",
+                img: "image1/gati6-2.png",note: "ターン経過毎にATK50%up(最大300%)",
+              },},},
           stage4: {
             "ステージ1, 2ラウンド戦": {
               1: {
-                normalAtk: "130万",
-                superAtk: "300万",
-                img: "image1/zise1-1.png",
-                note: "ターン経過毎にATK50%up(最大100%)",
+                normalAtk: "130万",superAtk: "300万",
+                img: "image1/zise1-1.png",note: "ターン経過毎にATK50%up(最大100%)",
               },
               2: {
-                normalAtk: "140万、必殺後210万",
-                superAtk: "470万",
-                img: "image1/zise1-2.png",
-                note: "ターン経過毎にATK90%up(最大450%)",
-              },
-            },
+                normalAtk: "140万、必殺後210万",superAtk: "470万",
+                img: "image1/zise1-2.png",note: "ターン経過毎にATK90%up(最大450%)",
+              },},
             "ステージ2, 2ラウンド戦": {
               1: {
-                normalAtk: "550万",
-                superAtk: "1200万",
-                img: "image1/zise2-1.png",
-                note: "なし",
+                normalAtk: "550万",superAtk: "1200万",
+                img: "image1/zise2-1.png",note: "なし",
               },
               2: {
-                normalAtk: "600万",
-                superAtk: "1700万",
-                img: "image1/zise2-2.png",
-                note: "ターン経過毎にATK20%down(最大100%)",
-              },
-            },
+                normalAtk: "600万",superAtk: "1700万",
+                img: "image1/zise2-2.png",note: "ターン経過毎にATK20%down(最大100%)",
+              },},
             ステージ3: {
               1: {
-                normalAtk: "400万、必殺後600万",
-                superAtk: "1300万",
-                img: "image1/zise3-1.png",
-                note: "攻撃を受ける毎にATK5%down(最大35%)",
+                normalAtk: "400万、必殺後600万",superAtk: "1300万",
+                img: "image1/zise3-1.png",note: "攻撃を受ける毎にATK5%down(最大35%)",
               },
               2: {
-                normalAtk: "60万、必殺後90万",
-                superAtk: "200万",
-                img: "image1/zise3-2.png",
-                note: "攻撃を受ける毎にATK100%up(最大1000%)",
-              },
-            },
+                normalAtk: "60万、必殺後90万",superAtk: "200万",
+                img: "image1/zise3-2.png",note: "攻撃を受ける毎にATK100%up(最大1000%)",
+              },},
             ステージ4: {
               1: {
-                normalAtk: "210万",
-                superAtk: "740万",
-                img: "image1/zise4.png",
-                note: "全位置に必殺",
-              },
-            },
+                normalAtk: "210万",superAtk: "740万",
+                img: "image1/zise4.png",note: "全位置に必殺",
+              },},
             "ステージ5, 1ラウンド戦-ラウンド1を悟飯,ラウンド2をゴテトラ": {
               1: {
-                normalAtk: "30万",
-                superAtk: "90万",
-                img: "image1/zise5-1.png",
-                note: "必殺時、会心確定（ATK50%up,相手のDEF70%down）。4ターン目以降ターン経過ごとにATK200%up(最大600%)",
+                normalAtk: "30万",superAtk: "90万",
+                img: "image1/zise5-1.png",note: "必殺時、会心確定（ATK50%up,相手のDEF70%down）。4ターン目以降ターン経過ごとにATK200%up(最大600%)",
               },
               2: {
-                normalAtk: "110万、必殺後140万",
-                superAtk: "360万",
-                img: "image1/zise5-2.png",
-                note: "2ターン目以降のターン経過毎ににATK100%up(最大300%)",
-              },
-            },
-          },
+                normalAtk: "110万、必殺後140万",superAtk: "360万",
+                img: "image1/zise5-2.png",note: "2ターン目以降のターン経過毎ににATK100%up(最大300%)",
+              },},},
           stage5: {
             ステージ1: {
               1: {
-                normalAtk: "90万",
-                superAtk: "250万",
-                img: "image1/jun1.png",
-                note: "梧空がいるとATK50%up",
-              },
-            },
+                normalAtk: "90万",superAtk: "250万",
+                img: "image1/jun1.png",note: "梧空がいるとATK50%up",
+              },},
             "ステージ2, 3ラウンド戦": {
               1: {
-                normalAtk: "80万、必殺後110万",
-                superAtk: "250万",
-                img: "image1/jun2-1.png",
-                note: "5ターン目にATK200%up",
+                normalAtk: "80万、必殺後110万",superAtk: "250万",
+                img: "image1/jun2-1.png",note: "5ターン目にATK200%up",
               },
               2: {
-                normalAtk: "85万",
-                superAtk: "250万",
-                img: "image1/jun2-2.png",
-                note: "ダメージを受ける毎にATK30%up(最大150%)",
+                normalAtk: "85万",superAtk: "250万",
+                img: "image1/jun2-2.png",note: "ダメージを受ける毎にATK30%up(最大150%)",
               },
               3: {
-                normalAtk: "120万",
-                superAtk: "420万",
-                img: "image1/jun2-3.png",
-                note: "ターン経過毎にATK50%up(最大200%)",
-              },
-            },
+                normalAtk: "120万",superAtk: "420万",
+                img: "image1/jun2-3.png",note: "ターン経過毎にATK50%up(最大200%)",
+              },},
             ステージ3: {
               1: {
-                normalAtk: "160万、必殺後210万",
-                superAtk: "500万",
-                img: "image1/jun3.png",
-                note: "HP50%以下でATK100%up",
-              },
-            },
+                normalAtk: "160万、必殺後210万",superAtk: "500万",
+                img: "image1/jun3.png",note: "HP50%以下でATK100%up",
+              },},
             "ステージ4, 3ラウンド戦": {
               1: {
-                normalAtk: "83万",
-                superAtk: "180万",
-                img: "image1/jun4-1.png",
-                note: "なし",
+                normalAtk: "83万",superAtk: "180万",
+                img: "image1/jun4-1.png",note: "なし",
               },
               2: {
-                normalAtk: "120万",
-                superAtk: "320万",
-                img: "image1/jun4-2.png",
-                note: "登場から2ターン目にATK50%up、4ターン目に100%up",
+                normalAtk: "120万",superAtk: "320万",
+                img: "image1/jun4-2.png",note: "登場から2ターン目にATK50%up、4ターン目に100%up",
               },
               3: {
-                normalAtk: "65万",
-                superAtk: "190万",
-                img: "image1/jun4-3.png",
-                note: "必殺時、会心確定(ATK100%up 敵DEF50%down)、攻撃を受ける毎にATK15%up(最大150%)",
-              },
-            },
+                normalAtk: "65万",superAtk: "190万",
+                img: "image1/jun4-3.png",note: "必殺時、会心確定(ATK100%up 敵DEF50%down)、攻撃を受ける毎にATK15%up(最大150%)",
+              },},
             "ステージ5, 3ラウンド戦-ラウンド3はカリフラ、ラウンド4はケール": {
               1: {
-                normalAtk: "120万",
-                superAtk: "340万",
-                img: "image1/jun5-1.png",
-                note: "たまに回避",
+                normalAtk: "120万",superAtk: "340万",
+                img: "image1/jun5-1.png",note: "たまに回避",
               },
               2: {
-                normalAtk: "80万",
-                superAtk: "240万",
-                img: "image1/jun5-2.png",
-                note: "必ず会心(ATK10%up,敵のDEF70%down)",
+                normalAtk: "80万",superAtk: "240万",
+                img: "image1/jun5-2.png",note: "必ず会心(ATK10%up,敵のDEF70%down)",
               },
               3: {
-                normalAtk: "160万",
-                superAtk: "470万",
-                img: "image1/jun5-3.png",
-                note: "ターン経過毎にATK30%up(最大150%)、登場から3ターン目にATK50%up",
+                normalAtk: "160万",superAtk: "470万",
+                img: "image1/jun5-3.png",note: "ターン経過毎にATK30%up(最大150%)、登場から3ターン目にATK50%up",
               },
               4: {
-                normalAtk: "100万、必殺後150万",
-                superAtk: "350万",
-                img: "image1/jun5-4.png",
-                note: "必ず会心(ATK10%up,敵のDEF70%down)、ターン経過毎にATK30%up(最大150%)、登場から3ターン目にATK100%up",
-              },
-            },
+                normalAtk: "100万、必殺後150万",superAtk: "350万",
+                img: "image1/jun5-4.png",note: "必ず会心(ATK10%up,敵のDEF70%down)、ターン経過毎にATK30%up(最大150%)、登場から3ターン目にATK100%up",
+              },},
             ステージ6: {
               1: {
-                normalAtk: "60万",
-                superAtk: "170万",
-                img: "image1/jun6-1.png",
-                note: "ターン経過毎にATK50%up(最大150%)",
+                normalAtk: "60万",superAtk: "170万",
+                img: "image1/jun6-1.png",note: "ターン経過毎にATK50%up(最大150%)",
               },
               2: {
-                normalAtk: "85万",
-                superAtk: "255万",
-                img: "image1/jun6-2.png",
-                note: "なし",
+                normalAtk: "85万",superAtk: "255万",
+                img: "image1/jun6-2.png",note: "なし",
               },
               3: {
-                normalAtk: "125万、必殺後160万",
-                superAtk: "410万",
-                img: "image1/jun6-3.png",
-                note: "テリトリースキル有りの場合ATK50%up",
+                normalAtk: "125万、必殺後160万",superAtk: "410万",
+                img: "image1/jun6-3.png",note: "テリトリースキル有りの場合ATK50%up",
               },
               4: {
-                normalAtk: "120万、必殺後170万",
-                superAtk: "420万",
-                img: "image1/jun6-4.png",
-                note: "ターン経過毎にATK30%up(最大150%)、攻撃を受けるたびにATK5%up(最大100%)",
-              },
-            },
-          },
-        };
+                normalAtk: "120万、必殺後170万",superAtk: "420万",
+                img: "image1/jun6-4.png",note: "ターン経過毎にATK30%up(最大150%)、攻撃を受けるたびにATK5%up(最大100%)",
+              },},},};
 
         stageSelect.addEventListener("change", () => {
           const stage = stageSelect.value;
@@ -749,54 +505,36 @@
           .getElementById("calcEnemyAtkBtn")
           .addEventListener("click", () => {
             const base = Number(document.getElementById("enemyBaseATK").value);
-            const add =
-              Number(document.getElementById("enemyAddPassive").value) / 100;
-            const mult =
-              Number(document.getElementById("enemyMultPassive").value) / 100;
-            const crit =
-              Number(document.getElementById("enemyCritPassive").value) / 100;
-            const terr =
-              Number(document.getElementById("enemyTerritoryPassive").value) /
-              100;
+            const add = Number(document.getElementById("enemyAddPassive").value) / 100;
+            const mult = Number(document.getElementById("enemyMultPassive").value) / 100;
+            const crit = Number(document.getElementById("enemyCritPassive").value) / 100;
+            const terr = Number(document.getElementById("enemyTerritoryPassive").value) / 100;
 
             // 各パッシブは%なので+1して掛け合わせる
-            const total =
-              base * (1 + add) * (1 + mult) * (1 + crit) * (1 + terr);
+            const total = base * (1 + add) * (1 + mult) * (1 + crit) * (1 + terr);
 
-            document.getElementById(
-              "enemyAtkResult"
-            ).innerText = `敵ATK実数値: ${Math.round(total).toLocaleString()}`;
-          });
+            document.getElementById("enemyAtkResult").innerText 
+                   = `敵ATK実数値: ${Math.round(total).toLocaleString()}`;
+        });
 
-        // 味方ATK
+
         // 味方ATK計算（%入力は +1.0 扱い）
         document
           .getElementById("calcAllyAtkBtn")
           .addEventListener("click", () => {
             const base = Number(document.getElementById("allyATK").value);
-            const leader =
-              Number(document.getElementById("leaderAtk").value) / 100 + 1;
-            const plus =
-              Number(document.getElementById("plusPassiveAtk").value) / 100 + 1;
-            const mult =
-              Number(document.getElementById("multPassiveAtk").value) / 100 + 1;
-            const ki =
-              Number(document.getElementById("kiBonus").value) / 100 + 1;
-            const link =
-              Number(document.getElementById("linkBonus").value) / 100 + 1;
-            const superB =
-              Number(document.getElementById("superBonus").value) / 100 + 1;
-            const active =
-              Number(document.getElementById("activeBonus").value) / 100 + 1;
-            const field =
-              Number(document.getElementById("fieldBonus").value) / 100 + 1;
+            const leader = Number(document.getElementById("leaderAtk").value) / 100 + 1;
+            const plus = Number(document.getElementById("plusPassiveAtk").value) / 100 + 1;
+            const mult = Number(document.getElementById("multPassiveAtk").value) / 100 + 1;
+            const ki = Number(document.getElementById("kiBonus").value) / 100 + 1;
+            const link = Number(document.getElementById("linkBonus").value) / 100 + 1;
+            const superB = Number(document.getElementById("superBonus").value) / 100 + 1;
+            const active = Number(document.getElementById("activeBonus").value) / 100 + 1;
+            const field = Number(document.getElementById("fieldBonus").value) / 100 + 1;
 
-            const result =
-              base * leader * plus * mult * ki * link * superB * active * field;
-
-            document.getElementById(
-              "allyAtkResult"
-            ).textContent = `実ATK: ${Math.floor(result).toLocaleString()}`;
+            const result = base * leader * plus * mult * ki * link * superB * active * field;
+            document.getElementById("allyAtkResult").textContent 
+                = `実ATK: ${Math.floor(result).toLocaleString()}`;
           });
 
         // 味方DEF計算（%入力は +1.0 扱い）
@@ -804,27 +542,18 @@
           .getElementById("calcAllyDefBtn")
           .addEventListener("click", () => {
             const base = Number(document.getElementById("allyDEF").value);
-            const leader =
-              Number(document.getElementById("leaderDef").value) / 100 + 1;
-            const plus =
-              Number(document.getElementById("plusPassiveDef").value) / 100 + 1;
-            const mult =
-              Number(document.getElementById("multPassiveDef").value) / 100 + 1;
-            const link =
-              Number(document.getElementById("linkBonusDef").value) / 100 + 1;
-            const superB =
-              Number(document.getElementById("superBonusDef").value) / 100 + 1;
-            const active =
-              Number(document.getElementById("activeBonusDef").value) / 100 + 1;
-            const field =
-              Number(document.getElementById("fieldBonusDef").value) / 100 + 1;
+            const leader = Number(document.getElementById("leaderDef").value) / 100 + 1;
+            const plus = Number(document.getElementById("plusPassiveDef").value) / 100 + 1;
+            const mult = Number(document.getElementById("multPassiveDef").value) / 100 + 1;
+            const link = Number(document.getElementById("linkBonusDef").value) / 100 + 1;
+            const superB = Number(document.getElementById("superBonusDef").value) / 100 + 1;
+            const active = Number(document.getElementById("activeBonusDef").value) / 100 + 1;
+            const field = Number(document.getElementById("fieldBonusDef").value) / 100 + 1;
 
-            const result =
-              base * leader * plus * mult * link * superB * active * field;
+            const result = base * leader * plus * mult * link * superB * active * field;
 
-            document.getElementById(
-              "allyDefResult"
-            ).textContent = `実DEF: ${Math.floor(result).toLocaleString()}`;
+            document.getElementById("allyDefResult").textContent 
+                   = `実DEF: ${Math.floor(result).toLocaleString()}`;
           });
       </script>
     </main>
