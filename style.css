@@ -143,35 +143,34 @@ select {
   text-overflow: ellipsis;
 }
 
-
-/* スマホ（幅600px以下）でも横並び維持したまま見やすく */
 @media screen and (max-width: 600px) {
   body {
-    font-size: 12px; /* 全体的に文字を小さく */
+    font-size: 10px;
   }
 
   header {
-    font-size: 1.2em;
-    padding: 0.6em 0;
+    font-size: 1em;
+    padding: 0.5em 0;
   }
 
   main {
-    padding: 1em 0.5em;
+    padding: 0.5em;
   }
 
+  .boxwidth {
+    width:6vw;
+  }
   .dash-section {
-    gap: 3vw; /* 間隔を狭める */
-    flex-wrap: nowrap; /* 横並び維持 */
+    gap: 1.5vw; /* さらに隙間を少し減らす */
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
 
-  .output-box {
-    width: 28vw; /* 25→28vwにして少し広げる */
-    padding: 0.6em;
-    margin-top: 1em;
-  }
-
+  .output-box,
   .flex-item {
-    width: 28vw;
+    width: 28vw; /* 28で3カラムだと、合計84 + gap×2 ≒ 87vwくらいでちょうどいい */
+    padding: 0.4em;
+    margin-top: 0.5em;
   }
 
   .damage-result-box {
@@ -180,36 +179,41 @@ select {
 
   input,
   select {
-    font-size: 0.85em;
-    padding: 0.4em;
-    margin: 0.3em;
+    font-size: 0.75em;
+    padding: 0.3em;
+    margin: 0.2em;
   }
 
   .small-input {
-    width: 12vw;
+    width: 10vw;
   }
 
   .round-img {
-    width: 18vw;
-    height: 18vh;
+    width: 16vw;
+    height: 14vh;
     margin: 0.3em;
   }
 
   button,
   a.page-link {
-    font-size: 0.9em;
-    padding: 0.6em 1.2em;
-    margin: 0.5em;
+    font-size: 0.8em;
+    padding: 0.4em 0.8em;
+    margin: 0.3em;
   }
 
   .note {
-    font-size: 0.8em;
-    line-height: 1.4em;
+    font-size: 0.75em;
+    line-height: 1.3em;
   }
 
   #stageSelect,
   #subStageSelect {
-    width: 14vw;
+    width: 90%;
+    font-size: 0.8em;
+  }
+
+  .section-title {
     font-size: 0.9em;
+    margin-bottom: 0.3em;
   }
 }

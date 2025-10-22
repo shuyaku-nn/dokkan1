@@ -18,13 +18,13 @@
             </p>
             <div class="output-box"> <!--ooutput自体には横幅の指定は無いけど、flexitemですでに宣言されていて、それを読み込む-->
               <label>敵ATK：
-              <input type="number" style="width:10vw;" id="enemyAtk" placeholder="例: 5000000"/></label>
+              <input type="number" style="width:10vw;" class="boxwidth" id="enemyAtk" placeholder="例: 5000000"/></label>
               <br />
               <label>味方DEF：
-              <input type="number" style="width:10vw;" id="allyDef" placeholder="例: 1000000"/></label>
+              <input type="number" style="width:10vw;" class="boxwidth" id="allyDef" placeholder="例: 1000000"/></label>
               <br />
               <label>軽減率（％）：
-              <input type="number" style="width:10vw;" id="reduction" placeholder="例: 20" /></label>
+              <input type="number" style="width:10vw;" class="boxwidth" id="reduction" placeholder="例: 20" /></label>
               <br />
               全属性ガード：
               <label> <input type="radio" name="guard" value="yes" />あり</label>
@@ -42,19 +42,19 @@
               <div class="output-box">
                 <label>ステージ：</label>
                 <select id="stageSelect">
-                  <option value="">選択してください</option>
-                  <option value="stage1">バトルフェスティバル,,,1ラウンド選択固定</option>
-                  <option value="stage2">スペシャルバトル 2025</option>
-                  <option value="stage3">ガチバトル</option>
-                  <option value="stage4">バトルスペクタル 次世代のサイヤ人編</option>
-                  <option value="stage5">レットゾーン 純粋サイヤ人編</option>
-                  <option value="stage6"></option>
-                  <option value="stage7"></option>
+                  <option value="" class="boxwidth">選択してください</option>
+                  <option value="stage1" class="boxwidth">バトルフェスティバル,,,1ラウンド選択固定</option>
+                  <option value="stage2" class="boxwidth">スペシャルバトル 2025</option>
+                  <option value="stage3" class="boxwidth">ガチバトル</option>
+                  <option value="stage4" class="boxwidth">バトルスペクタル 次世代のサイヤ人編</option>
+                  <option value="stage5" class="boxwidth">レットゾーン 純粋サイヤ人編</option>
+                  <option value="stage6" class="boxwidth"></option>
+                  <option value="stage7" class="boxwidth"></option>
                   </select><br />
 
                 <label>サブステージ：</label>
                 <select id="subStageSelect">
-                  <option value="">選択してください</option></select><br />
+                  <option value="" class="boxwidth">選択してください</option></select><br />
 
                 ラウンド：
                 <div id="roundRadios">
@@ -84,15 +84,15 @@
             <p class="section-title">敵ATK計算</p>
             <div class="output-box">
              <label>敵ATK：
-             <input type="number" style="width:12vw;" id="enemyBaseATK" placeholder="10000" /></label><br />
+             <input type="number" style="width:12vw;" class="boxwidth" id="enemyBaseATK" placeholder="10000" /></label><br />
              <label>足し算パッシブ：
-             <input type="number" style="width:10vw;" id="enemyAddPassive" placeholder="100%"/></label><br />
+             <input type="number" style="width:10vw;" class="boxwidth" id="enemyAddPassive" placeholder="100%"/></label><br />
              <label>掛け算パッシブ：
-             <input type="number" style="width:10vw;" id="enemyMultPassive" placeholder="100%"/></label><br />
+             <input type="number" style="width:10vw;" class="boxwidth" id="enemyMultPassive" placeholder="100%"/></label><br />
              <label>会心パッシブ：
-             <input type="number" style="width:10vw;" id="enemyCritPassive" placeholder="100%"/></label><br />
+             <input type="number" style="width:10vw;" class="boxwidth" id="enemyCritPassive" placeholder="100%"/></label><br />
              <label style="font-size:14px;">テリトリーパッシブ：
-             <input type="number" style="width:10vw;" id="enemyTerritoryPassive" placeholder="100%"/></label><br />
+             <input type="number" style="width:10vw;" class="boxwidth" id="enemyTerritoryPassive" placeholder="100%"/></label><br />
              <button id="calcEnemyAtkBtn">計算</button>
              <p id="enemyAtkResult">敵ATK実数値：---</p>
             </div>
@@ -107,31 +107,31 @@
           <p class="section-title">味方ATK計算</p>
           <div class="output-box underbox">
           <label>
-            ATK:<input type="number" id="allyATK" class="small-input" placeholder="10000" />
+            ATK:<input type="number" id="allyATK" class="small-input boxwidth" placeholder="10000" />
           </label><br />
           <label>
-            リーダー倍率:<input type="number" id="leaderAtk" class="small-input" placeholder="100%" />
+            リーダー倍率:<input type="number" id="leaderAtk" class="small-input boxwidth" placeholder="100%" />
           </label><br />
           <label>
-            足し算パッシブ:<input type="number" id="plusPassiveAtk" class="small-input" placeholder="100%" />
+            足し算パッシブ:<input type="number" id="plusPassiveAtk" class="small-input boxwidth" placeholder="100%" />
           </label><br />
           <label>
-            掛け算パッシブ:<input type="number" id="multPassiveAtk" class="small-input" placeholder="100%" />
+            掛け算パッシブ:<input type="number" id="multPassiveAtk" class="small-input boxwidth" placeholder="100%" />
           </label><br />
           <label>
-            気力補正:<input type="number" id="kiBonus" class="small-input" placeholder="100%" />
+            気力補正:<input type="number" id="kiBonus" class="small-input boxwidth" placeholder="100%" />
           </label><br />
           <label>
-            リンク倍率:<input type="number" id="linkBonus" class="small-input" placeholder="100%" />
+            リンク倍率:<input type="number" id="linkBonus" class="small-input boxwidth" placeholder="100%" />
             </label><br />
           <label>
-            必殺倍率:<input type="number" id="superBonus" class="small-input" placeholder="100%" />
+            必殺倍率:<input type="number" id="superBonus" class="small-input boxwidth" placeholder="100%" />
           </label><br />
           <label>
-            アクティブ倍率:<input type="number" id="activeBonus" class="small-input" placeholder="100%" />
+            アクティブ倍率:<input type="number" id="activeBonus" class="small-input boxwidth" placeholder="100%" />
             </label><br />
           <label>
-            フィールド倍率:<input type="number" id="fieldBonus" class="small-input" placeholder="100%" />
+            フィールド倍率:<input type="number" id="fieldBonus" class="small-input boxwidth" placeholder="100%" />
           </label><br />
           <button id="calcAllyAtkBtn">計算</button>
           <p id="allyAtkResult">実ATK: ---</p>
@@ -142,28 +142,28 @@
           <p class="section-title">味方DEF計算</p>
           <div class="output-box under-box">
           <label>
-            DEF:<input type="number"id="allyDEF"class="small-input"placeholder="10000" />
+            DEF:<input type="number"id="allyDEF"class="small-input boxwidth"placeholder="10000" />
             </label><br />
           <label>
-            リーダー倍率:<input type="number"id="leaderDef"class="small-input"placeholder="100%" />
+            リーダー倍率:<input type="number"id="leaderDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <label>
-            足し算パッシブ:<input type="number"id="plusPassiveDef"class="small-input"placeholder="100%" />
+            足し算パッシブ:<input type="number"id="plusPassiveDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <label>
-            掛け算パッシブ:<input type="number"id="multPassiveDef"class="small-input"placeholder="100%" />
+            掛け算パッシブ:<input type="number"id="multPassiveDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <label>
-            リンク倍率:<input type="number"id="linkBonusDef"class="small-input"placeholder="100%" />
+            リンク倍率:<input type="number"id="linkBonusDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <label>
-            必殺倍率:<input type="number"id="superBonusDef"class="small-input"placeholder="100%" />
+            必殺倍率:<input type="number"id="superBonusDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <label>
-            アクティブ倍率:<input type="number"id="activeBonusDef"class="small-input"placeholder="100%" />
+            アクティブ倍率:<input type="number"id="activeBonusDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <label>
-            フィールド倍率:<input type="number"id="fieldBonusDef"class="small-input"placeholder="100%" />
+            フィールド倍率:<input type="number"id="fieldBonusDef"class="small-input boxwidth"placeholder="100%" />
             </label><br />
           <button id="calcAllyDefBtn">計算</button>
           <p id="allyDefResult">実DEF: ---</p>
